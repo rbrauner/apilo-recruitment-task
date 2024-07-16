@@ -8,15 +8,18 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 final readonly class GetParcelsQuery
 {
+    #[Assert\Type('string')]
+    #[Assert\NotBlank]
+    #[Assert\Length(min: 3, max: 64)]
+    private string $city;
+
     public function __construct(
-        #[Assert\Type('string')]
-        #[Assert\NotBlank]
-        #[Assert\Length(min: 3, max: 64)]
-        private string $city,
+        string $city,
         #[Assert\Type('string')]
         #[Assert\Regex(pattern: '/^\d{2}-\d{3}$/')]
         private ?string $postCode = null,
     ) {
+        $this->city = ucfirst($city);
     }
 
     public function getCity(): string
