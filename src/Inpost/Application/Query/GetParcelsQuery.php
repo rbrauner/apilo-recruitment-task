@@ -13,11 +13,19 @@ final readonly class GetParcelsQuery
         #[Assert\Type('string')]
         #[Assert\Length(min: 1)]
         private string $city,
+        #[Assert\Type('string')]
+        #[Assert\Length(min: 1)]
+        private ?string $postCode = null,
     ) {
     }
 
     public function getCity(): string
     {
         return $this->city;
+    }
+
+    public function getPostCode(): ?string
+    {
+        return $this->postCode;
     }
 }

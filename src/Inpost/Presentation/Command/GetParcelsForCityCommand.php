@@ -51,7 +51,7 @@ final class GetParcelsForCityCommand extends Command
 
         try {
             /** @var InpostResult */
-            $result = $this->handle(new GetParcelsQuery($city));
+            $result = $this->handle(new GetParcelsQuery(city: $city));
         } catch (Throwable $throwable) {
             $io->error($throwable->getMessage());
 

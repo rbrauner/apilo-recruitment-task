@@ -36,10 +36,11 @@ final class GetParcelsForCityController extends AbstractController
         GetParcelsForCityParamsDto $query
     ): JsonResponse|NotFoundHttpException {
         $city = (string) $query->getCity();
+        $postCode = (string) $query->getPostCode();
 
         try {
             /** @var InpostResult */
-            $result = $this->handle(new GetParcelsQuery($city));
+            $result = $this->handle(new GetParcelsQuery(city: $city, postCode: $postCode));
         } catch (Throwable $throwable) {
             $this->logger->error($throwable->getMessage());
             return $this->createNotFoundException();
