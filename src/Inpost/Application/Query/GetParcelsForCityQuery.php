@@ -10,6 +10,8 @@ final readonly class GetParcelsForCityQuery
 {
     public function __construct(
         #[Assert\NotBlank]
+        #[Assert\Type('string')]
+        #[Assert\Length(min: 1)]
         private string $city,
     ) {
     }

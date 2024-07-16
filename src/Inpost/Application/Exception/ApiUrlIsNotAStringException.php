@@ -6,10 +6,10 @@ namespace App\Inpost\Application\Exception;
 
 use Exception;
 
-final class EmptyCityException extends Exception
+final class ApiUrlIsNotAStringException extends Exception
 {
     public function __construct()
     {
-        parent::__construct('City cannot be empty');
+        parent::__construct('API URL is not a string');
     }
 }
