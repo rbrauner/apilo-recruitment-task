@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Inpost\Application\Query;
 
+use App\Inpost\Application\Exception\EmptyCityException;
 use App\Inpost\Application\Query\GetParcelsForCityQuery;
 use App\Inpost\Application\Query\GetParcelsForCityQueryHandler;
 use App\Inpost\Domain\Model\AddressDetails;
@@ -56,5 +57,20 @@ final class GetParcelsForCityQueryHandlerTest extends TestCase
             $lastAddressDetails,
             $result->getItems()[11]->getAddressDetails()
         );
+        /** @phpstan-ignore-next-line */
+        static::assertNull($result->getItems()[-1]);
+        /** @phpstan-ignore-next-line */
+        static::assertNull($result->getItems()[12]);
+    }
+
+    public function testEmptyCity(): void
+    {
+        // Assign
+        $query = new GetParcelsForCityQuery('');
+        $handler = new GetParcelsForCityQueryHandler();
+
+        // Act & Assert
+        static::expectException(EmptyCityException::class);
+        $handler($query);
     }
 }
