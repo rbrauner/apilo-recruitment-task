@@ -25,6 +25,7 @@ final class InpostResult
     public function setCount(int $count): self
     {
         $this->count = $count;
+
         return $this;
     }
 
@@ -36,6 +37,7 @@ final class InpostResult
     public function setPage(int $page): self
     {
         $this->page = $page;
+
         return $this;
     }
 
@@ -47,6 +49,7 @@ final class InpostResult
     public function setTotalPages(int $totalPages): self
     {
         $this->totalPages = $totalPages;
+
         return $this;
     }
 
@@ -64,6 +67,7 @@ final class InpostResult
     public function setItems(array $items): self
     {
         $this->items = $items;
+
         return $this;
     }
 }

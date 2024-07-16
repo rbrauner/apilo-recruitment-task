@@ -20,6 +20,7 @@ final class City
     public function setName(string $name): self
     {
         $this->name = $name;
+
         return $this;
     }
 
@@ -31,6 +32,7 @@ final class City
     public function setAddressDetails(AddressDetails $addressDetails): self
     {
         $this->addressDetails = $addressDetails;
+
         return $this;
     }
 }
