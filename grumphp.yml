@@ -1,0 +1,28 @@
+grumphp:
+    tasks:
+        composer:
+            with_dependencies: true
+        composer_normalize:
+        file_size:
+        git_blacklist:
+        git_branch_name:
+            allow_detached_head: false
+        phpcs:
+        phpcsfixer:
+            config: ".php-cs-fixer.dist.php"
+        phpstan:
+            configuration: "phpstan.dist.neon"
+            memory_limit: "-1"
+        # phpunit:
+        #     config_file: "phpunit.xml.dist"
+        phpversion:
+            project: "8.3.9"
+        rector:
+            config: "rector.php"
+        securitychecker_composeraudit:
+        securitychecker_enlightn:
+        securitychecker_local:
+        securitychecker_roave:
+        securitychecker_symfony:
+        xmllint:
+        yamllint:

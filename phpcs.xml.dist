@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="PHP_CodeSniffer"
+    xsi:noNamespaceSchemaLocation="vendor/squizlabs/php_codesniffer/phpcs.xsd">
+
+    <file>bin</file>
+    <file>config</file>
+    <file>public</file>
+    <file>src</file>
+    <file>tests</file>
+    <file>.php-cs-fixer.dist.php</file>
+    <file>rector.php</file>
+
+    <exclude-pattern type="relative">^/var/*</exclude-pattern>
+    <exclude-pattern type="relative">^/vendor/*</exclude-pattern>
+
+    <arg name="basepath" value="." />
+    <arg name="cache" value=".phpcs-cache" />
+    <arg name="colors" />
+    <arg name="extensions" value="php" />
+    <arg value="sp" />
+
+    <ini name="memory_limit" value="-1" />
+
+    <autoload>vendor/autoload.php</autoload>
+
+    <rule ref="PSR12">
+        <exclude name="Generic.Files.LineLength" />
+    </rule>
+</ruleset>
