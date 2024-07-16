@@ -9,12 +9,12 @@ use Symfony\Component\Validator\Constraints as Assert;
 final readonly class GetParcelsQuery
 {
     public function __construct(
-        #[Assert\NotBlank]
         #[Assert\Type('string')]
-        #[Assert\Length(min: 1)]
+        #[Assert\NotBlank]
+        #[Assert\Length(min: 3, max: 64)]
         private string $city,
         #[Assert\Type('string')]
-        #[Assert\Length(min: 1)]
+        #[Assert\Regex(pattern: '/^\d{2}-\d{3}$/')]
         private ?string $postCode = null,
     ) {
     }

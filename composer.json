@@ -21,6 +21,7 @@
         "symfony/framework-bundle": "^6.4.9",
         "symfony/http-client": "^6.4.8",
         "symfony/messenger": "^6.4.9",
+        "symfony/monolog-bundle": "^3.10",
         "symfony/property-access": "^6.4.8",
         "symfony/runtime": "^6.4.8",
         "symfony/serializer": "^6.4.9",
