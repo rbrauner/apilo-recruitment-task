@@ -11,7 +11,7 @@ final class AddressDetails
         private ?string $province = null,
         private ?string $postCode = null,
         private ?string $street = null,
-        private ?int $buildingNumber = null,
+        private ?string $buildingNumber = null,
         private ?int $flatNumber = null,
     ) {
     }
@@ -64,12 +64,12 @@ final class AddressDetails
         return $this;
     }
 
-    public function getBuildingNumber(): ?int
+    public function getBuildingNumber(): ?string
     {
         return $this->buildingNumber;
     }
 
-    public function setBuildingNumber(?int $buildingNumber): self
+    public function setBuildingNumber(?string $buildingNumber): self
     {
         $this->buildingNumber = $buildingNumber;
 
