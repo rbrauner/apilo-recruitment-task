@@ -13,10 +13,10 @@ services:
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
-    # App\Module\:
-    #     resource: '../src/Module/'
-    #     exclude:
-    #         - '../src/Module/Domain/Entity/'
+    App\Inpost\:
+        resource: '../src/Inpost/'
+        exclude:
+            - '../src/Inpost/Domain/Entity/'
     App\Shared\:
         resource: '../src/Shared/'
         exclude:

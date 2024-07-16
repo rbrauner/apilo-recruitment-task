@@ -1,5 +1,5 @@
-# controllers_module:
+# controllers_inpost:
 #     resource:
-#         path: ../src/Module/Presentation/Controller/
-#         namespace: App\Module\Presentation\Controller
+#         path: ../src/Inpost/Presentation/Controller/
+#         namespace: App\Inpost\Presentation\Controller
 #     type: attribute
