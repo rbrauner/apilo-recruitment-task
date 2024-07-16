@@ -8,7 +8,7 @@ final class City
 {
     public function __construct(
         private ?string $name = null,
-        // private ?AddressDetails $addressDetails = null,
+        private ?AddressDetails $addressDetails = null,
     ) {
     }
 
@@ -24,15 +24,15 @@ final class City
         return $this;
     }
 
-    // public function getAddressDetails(): ?AddressDetails
-    // {
-    //     return $this->addressDetails;
-    // }
+    public function getAddressDetails(): ?AddressDetails
+    {
+        return $this->addressDetails;
+    }
 
-    // public function setAddressDetails(?AddressDetails $addressDetails): self
-    // {
-    //     $this->addressDetails = $addressDetails;
+    public function setAddressDetails(?AddressDetails $addressDetails): self
+    {
+        $this->addressDetails = $addressDetails;
 
-    //     return $this;
-    // }
+        return $this;
+    }
 }

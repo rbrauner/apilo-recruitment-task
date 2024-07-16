@@ -6,6 +6,7 @@ namespace App\Tests\Inpost\Application\Query;
 
 use App\Inpost\Application\Query\GetParcelsForCityQuery;
 use App\Inpost\Application\Query\GetParcelsForCityQueryHandler;
+use App\Inpost\Domain\Model\AddressDetails;
 use App\Inpost\Domain\Model\City;
 use App\Inpost\Domain\Model\InpostResult;
 use PHPUnit\Framework\Attributes\CoversClass;
@@ -26,22 +27,22 @@ final class GetParcelsForCityQueryHandlerTest extends KernelTestCase
         /** @var MessageBusInterface */
         $messenger = static::getContainer()->get('messenger.default_bus');
         $query = new GetParcelsForCityQuery('Kozy');
-        // $firstAddressDetails = (new AddressDetails())
-        //     ->setCity("Kozy")
-        //     ->setProvince("śląskie")
-        //     ->setPostCode("43-340")
-        //     ->setStreet("Gajowa")
-        //     ->setBuildingNumber("27")
-        //     ->setFlatNumber(null)
-        // ;
-        // $lastAddressDetails = (new AddressDetails())
-        //     ->setCity("Kozy")
-        //     ->setProvince("śląskie")
-        //     ->setPostCode("43-340")
-        //     ->setStreet("Krakowska")
-        //     ->setBuildingNumber("38A")
-        //     ->setFlatNumber(null)
-        // ;
+        $firstAddressDetails = (new AddressDetails())
+            ->setCity("Kozy")
+            ->setProvince("śląskie")
+            ->setPostCode("43-340")
+            ->setStreet("Gajowa")
+            ->setBuildingNumber("27")
+            ->setFlatNumber(null)
+        ;
+        $lastAddressDetails = (new AddressDetails())
+            ->setCity("Kozy")
+            ->setProvince("śląskie")
+            ->setPostCode("43-340")
+            ->setStreet("Krakowska")
+            ->setBuildingNumber("38A")
+            ->setFlatNumber(null)
+        ;
 
         // Act
         $envelope = $messenger->dispatch($query);
@@ -59,14 +60,14 @@ final class GetParcelsForCityQueryHandlerTest extends KernelTestCase
         static::assertCount(12, $result->getItems());
         static::assertInstanceOf(City::class, $result->getItems()[0]);
         static::assertEquals("KZY01A", $result->getItems()[0]->getName());
-        // static::assertEquals(
-        //     $firstAddressDetails,
-        //     $result->getItems()[0]->getAddressDetails()
-        // );
-        // static::assertEquals(
-        //     $lastAddressDetails,
-        //     $result->getItems()[11]->getAddressDetails()
-        // );
+        static::assertEquals(
+            $firstAddressDetails,
+            $result->getItems()[0]->getAddressDetails()
+        );
+        static::assertEquals(
+            $lastAddressDetails,
+            $result->getItems()[11]->getAddressDetails()
+        );
         /** @phpstan-ignore-next-line */
         static::assertNull($result->getItems()[-1]);
         /** @phpstan-ignore-next-line */
