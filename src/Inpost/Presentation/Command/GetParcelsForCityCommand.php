@@ -47,8 +47,7 @@ final class GetParcelsForCityCommand extends Command
     {
         $io = new SymfonyStyle($input, $output);
 
-        /** @var string $city */
-        $city = $input->getArgument('city');
+        $city = (string) $input->getArgument('city');
 
         try {
             /** @var InpostResult */

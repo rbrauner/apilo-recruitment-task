@@ -35,9 +35,7 @@ final class GetParcelsForCityController extends AbstractController
         #[MapQueryString]
         GetParcelsForCityParamsDto $query
     ): JsonResponse|NotFoundHttpException {
-
-        /** @var string $city */
-        $city = $query->getCity();
+        $city = (string) $query->getCity();
 
         try {
             /** @var InpostResult */
