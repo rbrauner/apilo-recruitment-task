@@ -6,7 +6,7 @@ namespace App\Inpost\Application\Query;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
-final readonly class GetParcelsForCityQuery
+final readonly class GetParcelsQuery
 {
     public function __construct(
         #[Assert\NotBlank]

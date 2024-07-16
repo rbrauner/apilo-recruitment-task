@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Inpost\Presentation\Command;
 
 use Override;
-use App\Inpost\Application\Query\GetParcelsForCityQuery;
+use App\Inpost\Application\Query\GetParcelsQuery;
 use App\Inpost\Domain\Model\InpostResult;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -51,7 +51,7 @@ final class GetParcelsForCityCommand extends Command
 
         try {
             /** @var InpostResult */
-            $result = $this->handle(new GetParcelsForCityQuery($city));
+            $result = $this->handle(new GetParcelsQuery($city));
         } catch (Throwable $throwable) {
             $io->error($throwable->getMessage());
 

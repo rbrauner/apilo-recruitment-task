@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Inpost\Presentation\Controller;
 
-use App\Inpost\Application\Query\GetParcelsForCityQuery;
+use App\Inpost\Application\Query\GetParcelsQuery;
 use App\Inpost\Presentation\Dto\GetParcelsForCityParamsDto;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -39,7 +39,7 @@ final class GetParcelsForCityController extends AbstractController
 
         try {
             /** @var InpostResult */
-            $result = $this->handle(new GetParcelsForCityQuery($city));
+            $result = $this->handle(new GetParcelsQuery($city));
         } catch (Throwable $throwable) {
             $this->logger->error($throwable->getMessage());
             return $this->createNotFoundException();

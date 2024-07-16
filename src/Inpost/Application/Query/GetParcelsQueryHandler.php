@@ -12,7 +12,7 @@ use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 #[AsMessageHandler(fromTransport: 'sync')]
-final readonly class GetParcelsForCityQueryHandler
+final readonly class GetParcelsQueryHandler
 {
     public function __construct(
         private ParameterBagInterface $params,
@@ -21,7 +21,7 @@ final readonly class GetParcelsForCityQueryHandler
     ) {
     }
 
-    public function __invoke(GetParcelsForCityQuery $message): InpostResult
+    public function __invoke(GetParcelsQuery $message): InpostResult
     {
         $apiUrl = $this->params->get('app.inpost.api_url');
         if (!is_string($apiUrl)) {

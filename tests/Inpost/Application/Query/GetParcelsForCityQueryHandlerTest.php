@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Tests\Inpost\Application\Query;
 
-use App\Inpost\Application\Query\GetParcelsForCityQuery;
-use App\Inpost\Application\Query\GetParcelsForCityQueryHandler;
+use App\Inpost\Application\Query\GetParcelsQuery;
+use App\Inpost\Application\Query\GetParcelsQueryHandler;
 use App\Inpost\Domain\Model\AddressDetails;
 use App\Inpost\Domain\Model\City;
 use App\Inpost\Domain\Model\InpostResult;
@@ -17,7 +17,7 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Symfony\Contracts\HttpClient\ResponseInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 
-#[CoversClass(GetParcelsForCityQueryHandler::class)]
+#[CoversClass(GetParcelsQueryHandler::class)]
 final class GetParcelsForCityQueryHandlerTest extends KernelTestCase
 {
     public function testCorrectRequest(): void
@@ -26,7 +26,7 @@ final class GetParcelsForCityQueryHandlerTest extends KernelTestCase
         $this->prepareClient();
         /** @var MessageBusInterface */
         $messenger = static::getContainer()->get('messenger.default_bus');
-        $query = new GetParcelsForCityQuery('Kozy');
+        $query = new GetParcelsQuery('Kozy');
         $firstAddressDetails = (new AddressDetails())
             ->setCity("Kozy")
             ->setProvince("śląskie")
@@ -80,7 +80,7 @@ final class GetParcelsForCityQueryHandlerTest extends KernelTestCase
         $this->prepareClient();
         /** @var MessageBusInterface */
         $messenger = static::getContainer()->get('messenger.default_bus');
-        $query = new GetParcelsForCityQuery('');
+        $query = new GetParcelsQuery('');
 
         // Act & Assert
         static::expectException(ValidationFailedException::class);
