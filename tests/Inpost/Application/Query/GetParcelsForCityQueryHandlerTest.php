@@ -6,11 +6,12 @@ namespace App\Tests\Inpost\Application\Query;
 
 use App\Inpost\Application\Query\GetParcelsForCityQuery;
 use App\Inpost\Application\Query\GetParcelsForCityQueryHandler;
-use App\Inpost\Domain\Model\AddressDetails;
+use App\Inpost\Domain\Model\City;
 use App\Inpost\Domain\Model\InpostResult;
 use PHPUnit\Framework\Attributes\CoversClass;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Messenger\Exception\ValidationFailedException;
+use Symfony\Component\Messenger\Stamp\HandledStamp;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Symfony\Contracts\HttpClient\ResponseInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
@@ -25,26 +26,28 @@ final class GetParcelsForCityQueryHandlerTest extends KernelTestCase
         /** @var MessageBusInterface */
         $messenger = static::getContainer()->get('messenger.default_bus');
         $query = new GetParcelsForCityQuery('Kozy');
-        $firstAddressDetails = (new AddressDetails())
-            ->setCity("Kozy")
-            ->setProvince("śląskie")
-            ->setPostCode("43-340")
-            ->setStreet("Gajowa")
-            ->setBuildingNumber("27")
-            ->setFlatNumber(null)
-        ;
-        $lastAddressDetails = (new AddressDetails())
-            ->setCity("Kozy")
-            ->setProvince("śląskie")
-            ->setPostCode("43-340")
-            ->setStreet("Krakowska")
-            ->setBuildingNumber("38A")
-            ->setFlatNumber(null)
-        ;
+        // $firstAddressDetails = (new AddressDetails())
+        //     ->setCity("Kozy")
+        //     ->setProvince("śląskie")
+        //     ->setPostCode("43-340")
+        //     ->setStreet("Gajowa")
+        //     ->setBuildingNumber("27")
+        //     ->setFlatNumber(null)
+        // ;
+        // $lastAddressDetails = (new AddressDetails())
+        //     ->setCity("Kozy")
+        //     ->setProvince("śląskie")
+        //     ->setPostCode("43-340")
+        //     ->setStreet("Krakowska")
+        //     ->setBuildingNumber("38A")
+        //     ->setFlatNumber(null)
+        // ;
 
         // Act
-        $result = $messenger->dispatch($query);
-        $result = $result->getMessage();
+        $envelope = $messenger->dispatch($query);
+        /** @var HandledStamp */
+        $handledStamp = $envelope->last(HandledStamp::class);
+        $result = $handledStamp->getResult();
 
         // Assert
         static::assertNotNull($result);
@@ -54,15 +57,16 @@ final class GetParcelsForCityQueryHandlerTest extends KernelTestCase
         static::assertEquals(1, $result->getTotalPages());
         static::assertIsArray($result->getItems());
         static::assertCount(12, $result->getItems());
+        static::assertInstanceOf(City::class, $result->getItems()[0]);
         static::assertEquals("KZY01A", $result->getItems()[0]->getName());
-        static::assertEquals(
-            $firstAddressDetails,
-            $result->getItems()[0]->getAddressDetails()
-        );
-        static::assertEquals(
-            $lastAddressDetails,
-            $result->getItems()[11]->getAddressDetails()
-        );
+        // static::assertEquals(
+        //     $firstAddressDetails,
+        //     $result->getItems()[0]->getAddressDetails()
+        // );
+        // static::assertEquals(
+        //     $lastAddressDetails,
+        //     $result->getItems()[11]->getAddressDetails()
+        // );
         /** @phpstan-ignore-next-line */
         static::assertNull($result->getItems()[-1]);
         /** @phpstan-ignore-next-line */

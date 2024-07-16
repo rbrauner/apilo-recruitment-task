@@ -54,7 +54,7 @@ final class InpostResult
     }
 
     /**
-     * @return list<City>
+     * @return City[]
      */
     public function getItems(): ?array
     {
@@ -62,7 +62,7 @@ final class InpostResult
     }
 
     /**
-     * @param list<City> $items
+     * @param City[] $items
      */
     public function setItems(?array $items): self
     {
