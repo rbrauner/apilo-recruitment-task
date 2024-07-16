@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Inpost\Presentation\Controller;
 
 use App\Inpost\Application\Query\GetParcelsQuery;
-use App\Inpost\Presentation\Dto\GetParcelsForCityParamsDto;
+use App\Inpost\Presentation\Dto\GetParcelsParamsDto;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -18,7 +18,7 @@ use App\Inpost\Domain\Model\InpostResult;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Throwable;
 
-final class GetParcelsForCityController extends AbstractController
+final class GetParcelsController extends AbstractController
 {
     use HandleTrait;
 
@@ -30,10 +30,10 @@ final class GetParcelsForCityController extends AbstractController
         $this->messageBus = $messageBus;
     }
 
-    #[Route('/get_parcels_for_city', name: 'app_impost_get_parcels_for_city', methods: ['GET'])]
+    #[Route('/get_parcels', name: 'app_inpost_get_parcels', methods: ['GET'])]
     public function index(
         #[MapQueryString]
-        GetParcelsForCityParamsDto $query
+        GetParcelsParamsDto $query
     ): JsonResponse|NotFoundHttpException {
         $city = (string) $query->getCity();
         $postCode = (string) $query->getPostCode();

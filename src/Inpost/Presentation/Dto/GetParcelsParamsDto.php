@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Inpost\Presentation\Dto;
 
-final readonly class GetParcelsForCityParamsDto
+final readonly class GetParcelsParamsDto
 {
     public function __construct(
         private ?string $city = null,
