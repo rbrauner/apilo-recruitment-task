@@ -19,7 +19,12 @@ final readonly class GetParcelsQuery
         #[Assert\Regex(pattern: '/^\d{2}-\d{3}$/')]
         private ?string $postCode = null,
     ) {
-        $this->city = ucfirst($city);
+        $city = mb_strtolower($city);
+        $city = explode(' ', $city);
+        array_walk($city, fn (&$value): string => $value = ucfirst($value));
+        $city = implode(' ', $city);
+
+        $this->city = $city;
     }
 
     public function getCity(): string
