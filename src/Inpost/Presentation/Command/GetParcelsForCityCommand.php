@@ -18,6 +18,9 @@ use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 use Throwable;
 
+/**
+ * CLI command to get Inpost parcels for city.
+ */
 #[AsCommand(
     name: 'app:inpost:get-parcels-for-city',
     description: 'Get inpost parcels for city',

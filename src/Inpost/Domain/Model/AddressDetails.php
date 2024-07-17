@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace App\Inpost\Domain\Model;
 
+/**
+ * Model of address details.
+ */
 final class AddressDetails
 {
     public function __construct(

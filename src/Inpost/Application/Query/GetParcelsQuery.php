@@ -6,6 +6,9 @@ namespace App\Inpost\Application\Query;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
+/**
+ * Get parcels query.
+ */
 final readonly class GetParcelsQuery
 {
     #[Assert\Type('string')]
@@ -13,6 +16,10 @@ final readonly class GetParcelsQuery
     #[Assert\Length(min: 3, max: 64)]
     private string $city;
 
+    /**
+     * @param string $city - City parameter, required, 3-64 characters.
+     * @param ?string $postCode - Post code parameter, optional, regex XX-XXX.
+     */
     public function __construct(
         string $city,
         #[Assert\Type('string')]

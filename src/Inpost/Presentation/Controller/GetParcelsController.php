@@ -18,6 +18,9 @@ use App\Inpost\Domain\Model\InpostResult;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Throwable;
 
+/**
+ * Rest controller to get parcels from Inpost API.
+ */
 final class GetParcelsController extends AbstractController
 {
     use HandleTrait;

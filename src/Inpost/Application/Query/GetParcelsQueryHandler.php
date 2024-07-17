@@ -11,6 +11,9 @@ use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
+/**
+ * Handler for query to receive parcels from Inpost API.
+ */
 #[AsMessageHandler(fromTransport: 'sync')]
 final readonly class GetParcelsQueryHandler
 {

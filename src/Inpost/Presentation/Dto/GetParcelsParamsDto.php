@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace App\Inpost\Presentation\Dto;
 
+/**
+ * Query params DTO for GetParcelsController.
+ */
 final readonly class GetParcelsParamsDto
 {
     public function __construct(

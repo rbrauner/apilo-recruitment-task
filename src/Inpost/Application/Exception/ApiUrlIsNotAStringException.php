@@ -6,6 +6,9 @@ namespace App\Inpost\Application\Exception;
 
 use Exception;
 
+/**
+ * "API URL is not a string" exception.
+ */
 final class ApiUrlIsNotAStringException extends Exception
 {
     public function __construct()
