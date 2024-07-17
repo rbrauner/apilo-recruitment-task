@@ -25,7 +25,7 @@ use Throwable;
     name: 'app:inpost:get-parcels',
     description: 'Get inpost parcels',
 )]
-final class GetParcelsForCityCommand extends Command
+final class GetParcelsCommand extends Command
 {
     use HandleTrait;
 
