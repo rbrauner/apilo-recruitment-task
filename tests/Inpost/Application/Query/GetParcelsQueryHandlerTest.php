@@ -74,6 +74,114 @@ final class GetParcelsQueryHandlerTest extends KernelTestCase
         static::assertNull($result->getItems()[12]);
     }
 
+    public function testDifferentSizesInCityName(): void
+    {
+        // Assign
+        $this->prepareClient();
+        /** @var MessageBusInterface */
+        $messenger = static::getContainer()->get('messenger.default_bus');
+        $query = new GetParcelsQuery('kOzY');
+        $firstAddressDetails = (new AddressDetails())
+            ->setCity("Kozy")
+            ->setProvince("śląskie")
+            ->setPostCode("43-340")
+            ->setStreet("Gajowa")
+            ->setBuildingNumber("27")
+            ->setFlatNumber(null)
+        ;
+        $lastAddressDetails = (new AddressDetails())
+            ->setCity("Kozy")
+            ->setProvince("śląskie")
+            ->setPostCode("43-340")
+            ->setStreet("Krakowska")
+            ->setBuildingNumber("38A")
+            ->setFlatNumber(null)
+        ;
+
+        // Act
+        $envelope = $messenger->dispatch($query);
+        /** @var HandledStamp */
+        $handledStamp = $envelope->last(HandledStamp::class);
+        $result = $handledStamp->getResult();
+
+        // Assert
+        static::assertNotNull($result);
+        static::assertInstanceOf(InpostResult::class, $result);
+        static::assertEquals(12, $result->getCount());
+        static::assertEquals(1, $result->getPage());
+        static::assertEquals(1, $result->getTotalPages());
+        static::assertIsArray($result->getItems());
+        static::assertCount(12, $result->getItems());
+        static::assertInstanceOf(City::class, $result->getItems()[0]);
+        static::assertEquals("KZY01A", $result->getItems()[0]->getName());
+        static::assertEquals(
+            $firstAddressDetails,
+            $result->getItems()[0]->getAddressDetails()
+        );
+        static::assertEquals(
+            $lastAddressDetails,
+            $result->getItems()[11]->getAddressDetails()
+        );
+        /** @phpstan-ignore-next-line */
+        static::assertNull($result->getItems()[-1]);
+        /** @phpstan-ignore-next-line */
+        static::assertNull($result->getItems()[12]);
+    }
+
+    public function testEmptySpacesAroundCityName(): void
+    {
+        // Assign
+        $this->prepareClient();
+        /** @var MessageBusInterface */
+        $messenger = static::getContainer()->get('messenger.default_bus');
+        $query = new GetParcelsQuery('   Kozy      ');
+        $firstAddressDetails = (new AddressDetails())
+            ->setCity("Kozy")
+            ->setProvince("śląskie")
+            ->setPostCode("43-340")
+            ->setStreet("Gajowa")
+            ->setBuildingNumber("27")
+            ->setFlatNumber(null)
+        ;
+        $lastAddressDetails = (new AddressDetails())
+            ->setCity("Kozy")
+            ->setProvince("śląskie")
+            ->setPostCode("43-340")
+            ->setStreet("Krakowska")
+            ->setBuildingNumber("38A")
+            ->setFlatNumber(null)
+        ;
+
+        // Act
+        $envelope = $messenger->dispatch($query);
+        /** @var HandledStamp */
+        $handledStamp = $envelope->last(HandledStamp::class);
+        $result = $handledStamp->getResult();
+
+        // Assert
+        static::assertNotNull($result);
+        static::assertInstanceOf(InpostResult::class, $result);
+        static::assertEquals(12, $result->getCount());
+        static::assertEquals(1, $result->getPage());
+        static::assertEquals(1, $result->getTotalPages());
+        static::assertIsArray($result->getItems());
+        static::assertCount(12, $result->getItems());
+        static::assertInstanceOf(City::class, $result->getItems()[0]);
+        static::assertEquals("KZY01A", $result->getItems()[0]->getName());
+        static::assertEquals(
+            $firstAddressDetails,
+            $result->getItems()[0]->getAddressDetails()
+        );
+        static::assertEquals(
+            $lastAddressDetails,
+            $result->getItems()[11]->getAddressDetails()
+        );
+        /** @phpstan-ignore-next-line */
+        static::assertNull($result->getItems()[-1]);
+        /** @phpstan-ignore-next-line */
+        static::assertNull($result->getItems()[12]);
+    }
+
     public function testEmptyCity(): void
     {
         // Assign

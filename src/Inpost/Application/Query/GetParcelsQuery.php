@@ -30,6 +30,7 @@ final readonly class GetParcelsQuery
         $city = explode(' ', $city);
         array_walk($city, fn (&$value): string => $value = ucfirst($value));
         $city = implode(' ', $city);
+        $city = trim($city);
 
         $this->city = $city;
     }
