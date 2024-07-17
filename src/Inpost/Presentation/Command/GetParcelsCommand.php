@@ -19,11 +19,11 @@ use Symfony\Component\Serializer\SerializerInterface;
 use Throwable;
 
 /**
- * CLI command to get Inpost parcels for city.
+ * CLI command to get Inpost parcels.
  */
 #[AsCommand(
-    name: 'app:inpost:get-parcels-for-city',
-    description: 'Get inpost parcels for city',
+    name: 'app:inpost:get-parcels',
+    description: 'Get inpost parcels',
 )]
 final class GetParcelsForCityCommand extends Command
 {

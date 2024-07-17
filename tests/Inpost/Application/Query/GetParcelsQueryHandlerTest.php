@@ -18,7 +18,7 @@ use Symfony\Contracts\HttpClient\ResponseInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 
 #[CoversClass(GetParcelsQueryHandler::class)]
-final class GetParcelsForCityQueryHandlerTest extends KernelTestCase
+final class GetParcelsQueryHandlerTest extends KernelTestCase
 {
     public function testCorrectRequest(): void
     {
