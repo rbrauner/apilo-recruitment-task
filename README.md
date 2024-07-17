@@ -44,3 +44,7 @@ Bazując na powyższym zadaniu rozszerz aplikację o endpoint REST API.
         - id (pole z API name)
         - line1 (pole line1)
         - line2 (pole line2)
+
+## Docs
+
+In the docs directory.
